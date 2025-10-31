@@ -1,29 +1,39 @@
+"use client";
+
 import Link from "next/link";
 
-export default function Navbar() {
+interface navLinkType {
+  name: string;
+  href: string;
+}
+const Navbar = () => {
+  const navLinks: navLinkType[] = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Client", href: "/clientcomp" },
+    { name: "Catchall", href: "/catchall" },
+    { name: "Datafetch", href: "/datafetch" },
+  ];
+
   return (
-    <header className="w-full">
-      <nav className="w-full flex justify-center items-center h-20 border-b-2 border-[#ffffff1a]">
-        <h1 className="w-[30%] text-4xl font-bold"> NextTut </h1>
-        <ul className="w-[50%] flex justify-evenly items-center">
-          {["Home", "About", "Services", "Clientcomp", "Contacts"].map(
-            (item, i): React.ReactElement => (
-              <li
-                key={i}
-                className="hover:text-blue-500 hover:scale-105 transition-all duration-200"
-              >
-                <Link
-                  href={`/${
-                    item.toLowerCase() === "home" ? "" : item.toLowerCase()
-                  }`}
-                >
-                  {item}
-                </Link>
+    <header className=" w-screen max-w-screen h-18 min-h-18">
+      <nav className="w-full h-full flex justify-between items-center border-b-2 border-[#ffffff41] px-5">
+        {/* logo section */}
+        <h1 className=" text-4xl font-bold"> NextTutorial </h1>
+
+        <ul className="font-bold text-xl flex justify-between items-center w-[35%]">
+          {navLinks.map((item, index): React.ReactElement => {
+            return (
+              <li key={index} className="hover:text-blue-700">
+                <Link href={item.href}> {item.name} </Link>
               </li>
-            )
-          )}
+            );
+          })}
         </ul>
       </nav>
     </header>
   );
-}
+};
+
+export default Navbar;
